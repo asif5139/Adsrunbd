@@ -208,8 +208,8 @@ document.addEventListener('DOMContentLoaded', function () {
   function showStatus(msg,type='info'){ statusMessage.textContent=msg; statusMessage.className=`status-message ${type}`;
     statusMessage.style.display='block'; setTimeout(()=>{statusMessage.style.display='none';},3500); }
 
-  function watchAd(){
-    if(state.dailyAdCount>=DAILY_AD_LIMIT){ showStatus('Daily ad limit reached. Come back tomorrow!','warning'); return; }
+  function requestAd(){ if(state.dailyAdCount>=DAILY_AD_LIMIT) return showStatus("Limit reached",'error'); show_9801301(); handleAdSuccess(); }
+
     state.balanceInCents += AD_REWARD_CENTS; state.totalAdCount++; state.dailyAdCount++;
     saveState(); updateUI(); showStatus(`+0.20 USTC added to your balance!`,'success');
   }
